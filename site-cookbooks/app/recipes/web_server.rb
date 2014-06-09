@@ -13,6 +13,12 @@ include_recipe "apache2::mod_rewrite"
 include_recipe "apache2::mod_ssl"
 
 # Install PHP
+directory "/etc/php5/conf.d" do
+  owner "root"
+  group "root"
+  mode 00755
+  action :create
+end
 include_recipe "php::dotdeb"
 include_recipe "php"
 include_recipe "php::apache2"
