@@ -19,11 +19,13 @@ The idea is for developers to fork this and add additional software and configur
 **Note:** Vagrant 1.0.x compatible stack [is also available](https://github.com/MiniCodeMonkey/Vagrant-LAMP-Stack/tree/Vagrant-1.0.x).
 
 ## Installation
-Clone this repository
+Clone this repository into a sub folder of your project, next to your project's `web` folder.
 
     $ git clone git@github.com:MiniCodeMonkey/Vagrant-LAMP-Stack.git
 
-Place your website in the `public_html` folder
+Create your Vagrantfile from Vagrantfile.dist and modify as you want:
+
+    $ cp Vagrantfile.dist Vagrantfile
 
 ## Usage
 Start the VM
