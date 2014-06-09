@@ -14,8 +14,9 @@ include_recipe "apache2::mod_ssl"
 
 # Set apache run user
 bash "set-apache-run-user" do
-  code "sed -i -r -e 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=vagrant/g' -e 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=vagrant/g' /etc/apache2/envvars"
-  notifies :restart, resources("service[apache2]"), :delayed
+  notifies :stop, resources("service[apache2]")
+  code "sed -i -r -e 's/User www-data/User vagrant/g' -e 's/Group www-data/Group vagrant/g' /etc/apache2/apache2.conf; sed -i -r -e 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=vagrant/g' -e 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=vagrant/g' /etc/apache2/envvars; chown -R vagrant /run/lock/apache2"
+  notifies :start, resources("service[apache2]"), :delayed
 end
 
 # Install PHP
