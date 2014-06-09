@@ -8,6 +8,9 @@
 # Install MySQL server & MySQL client
 include_recipe "mysql::server"
 
+# Install PostgreSQL
+include_recipe "postgresql::server"
+
 # Create database if it doesn't exist
 ruby_block "create_#{node['app']['name']}_db" do
     block do

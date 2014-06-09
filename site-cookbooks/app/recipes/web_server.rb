@@ -13,25 +13,23 @@ include_recipe "apache2::mod_rewrite"
 include_recipe "apache2::mod_ssl"
 
 # Install PHP
-include_recipe "dotdeb"
-include_recipe "dotdeb::php54"
+include_recipe "php::dotdeb"
 include_recipe "php"
-
-# Install PHP5 packages
-node['app']['php_packages'].each do |a_package|
-  package a_package
-end
-
-# Fix deprecated comments in PHP ini files by replacing '#' with ';'
-bash "fix-phpcomments" do
-  code "find /etc/php5/cli/conf.d/ -name '*.ini' -exec sed -i -re 's/^(\\s*)#(.*)/\\1;\\2/g' {} \\;"
-  notifies :restart, resources("service[apache2]"), :delayed
-end
+include_recipe "php::apache2"
+include_recipe "php::module_opcache"
+include_recipe "php::module_gd"
+include_recipe "php::module_imap"
+include_recipe "php::module_intl"
+include_recipe "php::module_mbstring"
+include_recipe "php::module_mcrypt"
+include_recipe "php::module_memcache"
+include_recipe "php::module_mysql"
+include_recipe "php::module_pgsql"
+include_recipe "php::module_curl"
+include_recipe "php::module_xml"
+include_recipe "php::module_soap"
+include_recipe "php::module_ldap"
 
 # Install Composer
-bash "composer" do
-  code <<-EOH
-    curl -s https://getcomposer.org/installer | php
-    sudo mv composer.phar /usr/local/bin/composer
-  EOH
-end
+include_recipe "composer"
+
