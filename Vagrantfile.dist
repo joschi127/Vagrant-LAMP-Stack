@@ -42,6 +42,11 @@
     #config.vm.synced_folder "../" , "/var/www/" + project_name + "/", :mount_options => ["dmode=777", "fmode=666"]
     config.vm.synced_folder "../" , "/var/www/" + project_name + "/", :nfs => true
 
+    # SSH agent forwarding to allow using your own private key to
+    # authenticate to git servers
+    config.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa']
+    config.ssh.forward_agent = true
+
     # Use hostonly network with a static IP Address and enable
     # hostmanager so we can have a custom domain for the server
     # by modifying the host machines hosts file
