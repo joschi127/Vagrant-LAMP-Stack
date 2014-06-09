@@ -14,8 +14,7 @@ include_recipe "apache2::mod_ssl"
 
 # Set apache run user
 bash "set-apache-run-user" do
-  code "sed -i -re 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=vagrant/g' /etc/apache2/envvars"
-  code "sed -i -re 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=vagrant/g' /etc/apache2/envvars"
+  code "sed -i -r -e 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=vagrant/g' -e 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=vagrant/g' /etc/apache2/envvars"
   notifies :restart, resources("service[apache2]"), :delayed
 end
 
