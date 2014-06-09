@@ -40,7 +40,8 @@
 
     # Set share folder
     #config.vm.synced_folder "../" , "/var/www/" + project_name + "/", :mount_options => ["dmode=777", "fmode=666"]
-    config.vm.synced_folder "../" , "/var/www/" + project_name + "/", :nfs => true
+    config.vm.synced_folder "../" , "/vagrant-nfs", :nfs => true
+    config.bindfs.bind_folder "/vagrant-nfs", "/var/www/" + project_name + "/"
 
     # SSH agent forwarding to allow using your own private key to
     # authenticate to git servers
