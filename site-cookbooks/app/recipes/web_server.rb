@@ -43,12 +43,6 @@ include_recipe "php::module_xml"
 include_recipe "php::module_soap"
 include_recipe "php::module_ldap"
 
-# Fix php.ini, do not use disable_functions
-bash "fix-php-ini-disable-functions" do
-  code "find /etc/php5/ -name 'php.ini' -exec sed -i -re 's/^(\\s*)disable_functions(.*)/\\1;disable_functions\\2/g' {} \\;"
-  notifies :restart, resources("service[apache2]"), :delayed
-end
-
 # Install Composer
 include_recipe "composer"
 
