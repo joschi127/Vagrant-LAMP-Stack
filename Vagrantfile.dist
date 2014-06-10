@@ -38,6 +38,13 @@
       vb.customize ["modifyvm", :id, "--ostype", "Debian_64"]
     end
 
+    # Docker settings (not fully working yet, but keep it, maybe it will work soon)
+    config.vm.provider :docker do |docker|
+      docker.image   = 'fgrehm/vagrant-ubuntu:precise'
+      docker.has_ssh = true
+      docker.force_host_vm = false
+    end
+
     # Set share folder
     #config.vm.synced_folder "../" , "/var/www/" + project_name + "/", :mount_options => ["dmode=777", "fmode=666"]
     #config.vm.synced_folder "../" , "/var/www/" + project_name + "/", :nfs => true, :mount_options => ['rw', 'vers=3', 'udp', 'fsc']
