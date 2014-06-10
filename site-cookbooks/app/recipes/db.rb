@@ -26,8 +26,7 @@ if File.exist?("#{node['app']['db_dump']}")
         block do
             %x[mysql -u root -p#{node['mysql']['server_root_password']} #{node['app']['db_name']} < #{node['app']['db_dump']}]
         end
-        not_if "mysql -u root -p#{node['mysql']['server_root_password']} -e \"SHOW TABLES FROM #{node['app']['db_name']}\" | \
-            grep 1"
+        not_if "mysql -u root -p#{node['mysql']['server_root_password']} -e \"SHOW TABLES FROM #{node['app']['db_name']}\" | grep \"Tables_in_\""
         action :create
     end
 end
