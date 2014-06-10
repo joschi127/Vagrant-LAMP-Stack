@@ -75,6 +75,9 @@
           # Name of MySQL database that should be created
           :db_name        => "dbname",
 
+          # Name of database dump that should be imported
+          :db_dump        => "/var/www/" + project_name + "/db_dump.sql",
+
           # Server name and alias(es) for Apache vhost
           :server_name    => project_name + ".local",
           :server_aliases =>  [ "www." + project_name + ".local" ],
